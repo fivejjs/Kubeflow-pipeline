@@ -89,7 +89,7 @@ deploymentSpec:
         - -c
         - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
           \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.11.0'\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
           \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
           $0\" \"$@\"\n"
         - sh
@@ -120,7 +120,7 @@ deploymentSpec:
           \ cmap=plt.cm.Blues)\n    plt.title('Confusion Matrix')\n    plt.colorbar()\n\
           \    plt.xlabel('Predicted Label')\n    plt.ylabel('True Label')\n    plt.savefig(metrics_path.replace('.txt',\
           \ '.png'))\n\n"
-        image: python:3.9
+        image: python:3.11-slim
     exec-load-data:
       container:
         args:
@@ -133,7 +133,7 @@ deploymentSpec:
         - -c
         - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
           \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.11.0'\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
           \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
           $0\" \"$@\"\n"
         - sh
@@ -154,7 +154,7 @@ deploymentSpec:
           \ columns=iris.feature_names)\n    df['target'] = iris.target\n\n    # Save\
           \ the dataset to the output artifact path\n    df.to_csv(output_csv.path,\
           \ index=False)\n\n"
-        image: python:3.9
+        image: python:3.11-slim
     exec-preprocess-data:
       container:
         args:
@@ -167,7 +167,7 @@ deploymentSpec:
         - -c
         - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
           \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.11.0'\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
           \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
           $0\" \"$@\"\n"
         - sh
@@ -215,7 +215,7 @@ deploymentSpec:
           \ \n    X_test_df.to_csv(output_test.path, index=False)\n\n    y_train_df.to_csv(output_ytrain.path,\
           \ index=False)  \n    y_test_df.to_csv(output_ytest.path, index=False) \n\
           \n"
-        image: python:3.9
+        image: python:3.11-slim
     exec-train-model:
       container:
         args:
@@ -228,7 +228,7 @@ deploymentSpec:
         - -c
         - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
           \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.11.0'\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.12.1'\
           \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
           $0\" \"$@\"\n"
         - sh
@@ -260,7 +260,7 @@ deploymentSpec:
           \ contains NaN values.\" \n\n    # Train model\n    model = LogisticRegression()\n\
           \    model.fit(X_train, y_train)\n\n    # Save model\n    dump(model, model_output.path)\n\
           \n"
-        image: python:3.9
+        image: python:3.11-slim
 pipelineInfo:
   name: ml-pipeline
 root:
@@ -332,4 +332,4 @@ root:
         taskInfo:
           name: train-model
 schemaVersion: 2.1.0
-sdkVersion: kfp-2.11.0
+sdkVersion: kfp-2.12.1
